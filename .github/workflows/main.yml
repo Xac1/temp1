@@ -58,12 +58,12 @@ jobs:
           push: false
           tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, ${{ env.REGISTRY }}/${{ env.REPO }}:latest
 
-      - name: Build image with tests
-        uses: docker/build-push-action@v5
-        with:
-          file: Dockerfile_tests
-          push: false
-          tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
+      #- name: Build image with tests
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    file: Dockerfile_tests
+      #    push: false
+      #    tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
       
       #- name: Run tests
       #  id: run_tests
