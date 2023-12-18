@@ -48,6 +48,10 @@ jobs:
     #     run: |
     #         echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
       - name: Build image
         uses: docker/build-push-action@v5
         with:
