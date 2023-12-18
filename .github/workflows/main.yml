@@ -41,6 +41,17 @@ jobs:
       run: |
         echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
+    - name: Build and Push Docker Image
+      run: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/username/repo:tag
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REGISTRY: ghcr.io
+
     - name: Build image
       uses: docker/build-push-action@v5
       with:
