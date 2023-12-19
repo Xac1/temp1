@@ -43,11 +43,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    # if you want to use the this function you need change IMAGE_NAME to REPO in next step .    
-    #   - name: downcase REPO name
-    #     run: |
-    #         echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-
       - name: downcase REPO
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
@@ -58,18 +53,18 @@ jobs:
           push: false
           tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, ${{ env.REGISTRY }}/${{ env.REPO }}:latest
 
-      #- name: Build image with tests
-      #  uses: docker/build-push-action@v5
-      #  with:
-      #    file: Dockerfile_tests
-      #    push: false
-      #    tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
+      - name: Build image with tests
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile_tests
+          push: false
+          tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
       
-      #- name: Run tests
-      #  id: run_tests
-      #  run: |
-      #    docker compose up -d mysql
-      #    docker compose up --exit-code-from python_testing_app python_testing_app
+      - name: Run tests
+        id: run_tests
+        run: |
+          docker compose up -d mysql
+          docker compose up --exit-code-from python_testing_app python_testing_app
           
 
       - name: Push image
