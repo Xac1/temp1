@@ -1,15 +1,15 @@
-FROM ubuntu:22.04
+FROM alpine
 
-RUN apt update && apt install python3 python3-pip -y
+# Install dependencies
+RUN apk update && \
+    apk add python3 py3-pip mariadb-connector-c-dev && \
+    pip3 install  --break-system-packages pymysql cryptography==3.4.8 python-dotenv && \
+    apk add --no-cache mariadb-client
 
-RUN python3 -m pip install mysql-connector-python
+# Copy source code to image
+COPY ./src /app
+# Set working directory
+WORKDIR /app
 
-RUN mkdir -p /workdir
-
-COPY src /workdir
-
-WORKDIR /workdir
-
-ENTRYPOINT [ "python3", "main.py" ]
-
-
+# Run the application
+CMD ["python3", "main.py"]
