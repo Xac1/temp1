@@ -79,8 +79,8 @@ networks:
     driver: bridge
 
 # ---- for secrets usage in docker-compose (you should create .env_mysql_root_password and .env_mysql_password files) and uncomment secrets section and line with passwords:
-# secrets:
-#   mysql_root_password:
-#     file: .env_mysql_root_password
-#   mysql_password:
-#     file: .env_mysql_password
+secrets:
+  mysql_root_password:
+    file: .env_mysql_root_password
+  mysql_password:
+    file: .env_mysql_password
