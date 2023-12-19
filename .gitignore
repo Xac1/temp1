@@ -1,4 +1,4 @@
 .env
-.env_mysql_root_password 
-.env_mysql_password
+#.env_mysql_root_password 
+#.env_mysql_password
 
