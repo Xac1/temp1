@@ -1,4 +1,4 @@
-FROM ghcr.io/xac1/actions-build-tests:latest
+FROM ghcr.io/Xac1/actions-build-tests:latest
 
 # Copy source code to image
 COPY tests /app
