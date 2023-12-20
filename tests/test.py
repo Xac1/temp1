@@ -1,48 +1,82 @@
-import unittest
-from main import CustomMysql
+#!/usr/bin/python3
 
-class TestCustomMysql(unittest.TestCase):
+import mysql.connector
 
-    def setUp(self):
-        # Create an instance of CustomMysql for testing
-        self.mysql_instance = CustomMysql()
 
-    def tearDown(self):
-        # Close the connection after each test
-        self.mysql_instance.close_connection()
+class Mysql:
+    def __init__(self, host, user, password, database):
+        self.host = host
+        self.user = user
+        self.password = password
+        self.database = database
+        self.connection = None
+        self.cursor = None
 
-    def test_create_shop(self):
-        # Check if the table 'shop' exists in the database
-        table_exists_query = "SHOW TABLES LIKE 'shop'"
-        existing_table = self.mysql_instance.fetch_one(table_exists_query)
-        if existing_table:
-            # If the table already exists, consider it as a pass
-            self.assertTrue(True)
+
+
+    def connect(self):
+        self.connection = mysql.connector.connect(
+            host=self.host,
+            user=self.user,
+            password=self.password,
+            database=self.database
+        )
+        if self.connection.is_connected():
+            self.cursor = self.connection.cursor()
+            print("Connected to MySQL database")
         else:
-            # If the table doesn't exist, test the create_shop method
-            self.mysql_instance.create_shop()
-            # Check if the table 'shop' now exists in the database
-            created_table = self.mysql_instance.fetch_one(table_exists_query)
-            self.assertIsNotNone(created_table, "Table 'shop' does not exist after creation")
-
-    def test_delete_shop(self):
-        # Delete the table 'shop' if it exists
-        self.mysql_instance.delete_shop()
-    
-    def test_add_and_fetch_item(self):
-        # Add an item to the shop and fetch it
-        self.mysql_instance.create_shop()
-        self.mysql_instance.add_item("apple", 1.99)
-        items = self.mysql_instance.fetch_all("SELECT * FROM shop")
-        expected_item = ("apple", 1.99)
-        
-    # def test_delete_item(self):
-    #     # Add an item to the shop, delete it and check if it's gone
-    #     self.mysql_instance.add_item("apple", 1.99)
-    #     self.mysql_instance.delete_item("apple")
-    #     items = self.mysql_instance.fetch_all("SELECT * FROM shop")
-    #     self.assertNotIn(("apple", 1.99), items)
+            print("Connection failed.")
 
 
-if __name__ == '__main__':
-    unittest.main()
+
+    def execute_query(self, query):
+        self.cursor.execute(query)
+        self.connection.commit()
+
+        print("Query executed successfully")
+
+
+   # def select_all(self, select_query):
+   #     self.select_query = select_query
+   #     self.cursor.execute(select_query)
+   #
+   #     myresult = self.cursor.fetchall()
+   #     for x in myresult:
+   #         print(x)
+
+
+
+host="mysql"
+user="py_user"
+password="py_pass"
+database="py_db"
+
+# Create an instance of MySQLConnector
+
+mysql_connector = Mysql(host, user, password, database)
+
+mysql_connector.connect()
+
+#create_shop = "CREATE TABLE shop (id int, item varchar(255), price varchar(255));"
+#add_item = "INSERT INTO shop VALUES ('1', 'Tank', '1M$')"
+#delete_item = "DELETE FROM shop WHERE product_id=1"
+#delete_shop = "DROP TABLE shop"
+#show_table = "SELECT * FROM shop"
+#
+#
+##mysql_connector.execute_query(create_shop)
+#add = mysql_connector.execute_query(add_item)
+#
+#
+#
+##mysql_connector.execute_query(show_table)
+#
+#results = mysql_connector.select_all(show_table)
+
+
+
+
+             
+
+
+
