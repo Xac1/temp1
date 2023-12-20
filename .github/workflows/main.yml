@@ -82,15 +82,15 @@ jobs:
           rm -rf coverage/.gitignore
 
 
-      #- name: Push coverage
-      #  uses: EndBug/add-and-commit@v9
-      #  with:
-      #    author_name: Xac
-      #    author_email: xac_cs@ukr.net
-      #    message: 'Add code coverage report'
-      #    add: 'coverage'
-      #    new_branch: gh-pages 
-      #    push: true
+      - name: Push coverage
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Xac
+          author_email: xac_cs@ukr.net
+          message: 'Add code coverage report'
+          add: 'coverage'
+          new_branch: gh-pages 
+          push: true
         
 
       #- name: Deploy to GitHub Pages
