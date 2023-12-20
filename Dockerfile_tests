@@ -4,6 +4,6 @@ FROM ghcr.io/xac1/temp1:latest
 COPY tests /add
 
 # add coverage
-RUN apk add py3-coverage
+RUN apt-get install -y python3-coverage
 # Run the application
 CMD ["sh", "-c", "python3 main.py && python3 -m unittest test.py"]
