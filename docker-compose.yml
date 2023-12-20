@@ -42,7 +42,7 @@ services:
       context: .
       dockerfile: Dockerfile_tests
     environment:
-      DB_HOST: localhost
+      DB_HOST: mysql
       DB_USER: py_user
       DB_PASSWORD_FILE: /run/secrets/mysql_password
       #DB_PASSWORD: ${DB_USER_PASSWORD}
