@@ -6,4 +6,4 @@ COPY tests /add
 # add coverage
 RUN apt-get install -y python3-coverage
 # Run the application
-CMD ["sh", "-c", "python3 main.py && python3 -m unittest test.py"]
+CMD ["sh", "-c", "python3 connect_and_run.py && python3 -m unittest test.py"]
