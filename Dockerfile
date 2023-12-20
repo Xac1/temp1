@@ -8,7 +8,7 @@ RUN python3 -m pip install mysql-connector-python
 
 WORKDIR /app
 
-COPY connect_and_run.py .
+COPY ./src/connect_and_run.py .
 
 #EXPOSE 80
 
