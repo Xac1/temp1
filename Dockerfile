@@ -1,13 +1,17 @@
-FROM ubuntu:22.04
+FROM python:3.11.6-bullseye
 
-RUN apt update && apt install python3 python3-pip -y
+
+RUN apt update && apt install python3-pip -y
 
 RUN python3 -m pip install mysql-connector-python
 
-RUN mkdir -p /workdir
 
-COPY src /workdir
+WORKDIR /app
 
-WORKDIR /workdir
+COPY connect_and_run.py .
 
-ENTRYPOINT [ "python3", "main.py" ]
+#EXPOSE 80
+
+ENTRYPOINT ["python3", "connect_and_run.py" ]
+
+

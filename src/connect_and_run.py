@@ -46,7 +46,7 @@ class Mysql:
 
 
 
-host="localhost"
+host="mysql"
 user="py_user"
 password="py_pass"
 database="py_db"
