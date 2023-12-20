@@ -3,7 +3,7 @@ version: '3.9'
 services:
   mysql:
     image: mysql:8.0.34-debian
-    container_name: mysql
+    container_name: mysql-server
     restart: unless-stopped
     command: --default-authentication-plugin=caching_sha2_password
 
@@ -45,8 +45,8 @@ services:
     environment:
       DB_HOST: mysql
       DB_USER: py_user
-      DB_PASSWORD_FILE: /run/secrets/mysql_password
-      #DB_PASSWORD: ${DB_USER_PASSWORD}
+      #DB_PASSWORD_FILE: /run/secrets/mysql_password
+      DB_PASSWORD: ${DB_USER_PASSWORD}
       DB_DATABASE: py_db
     ports:
       - "80:8000"
@@ -65,8 +65,8 @@ services:
     environment:
       DB_HOST: mysql
       DB_USER: py_user
-      DB_PASSWORD_FILE: /run/secrets/mysql_password
-      #DB_PASSWORD: ${DB_USER_PASSWORD}
+      #DB_PASSWORD_FILE: /run/secrets/mysql_password
+      DB_PASSWORD: ${DB_USER_PASSWORD}
       DB_DATABASE: py_db
     entrypoint: >
       sh -c "coverage run -m unittest test.py &&
